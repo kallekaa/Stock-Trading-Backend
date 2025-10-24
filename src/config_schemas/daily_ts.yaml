@@ -1,0 +1,18 @@
+# Configuration schema for daily time series experiments
+horizon: 1
+feature_set: default_daily
+models:
+  - name: RandomForestRegressor
+    params:
+      n_estimators: 200
+      max_depth: 8
+      random_state: 42
+  - name: GradientBoostingRegressor
+    params:
+      n_estimators: 300
+      learning_rate: 0.05
+      max_depth: 3
+split:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15

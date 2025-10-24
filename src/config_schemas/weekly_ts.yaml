@@ -1,0 +1,13 @@
+# Configuration schema for weekly time series experiments
+horizon: 1
+feature_set: default_weekly
+models:
+  - name: RandomForestRegressor
+    params:
+      n_estimators: 300
+      max_depth: 9
+      random_state: 42
+split:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15

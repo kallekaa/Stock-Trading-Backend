@@ -1,0 +1,15 @@
+# Configuration schema for weekly regression tasks
+horizon: 1
+feature_set: default_weekly
+models:
+  - name: LinearRegression
+    params: {}
+  - name: GradientBoostingRegressor
+    params:
+      n_estimators: 400
+      learning_rate: 0.03
+      max_depth: 3
+split:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15

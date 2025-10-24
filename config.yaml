@@ -1,0 +1,82 @@
+project:
+  name: Stock Market ML
+  description: Daily and weekly forecasting framework for equities
+
+data:
+  tickers:
+    - AAPL
+    - MSFT
+    - SPY
+  start_date: 2018-01-01
+  end_date: null  # defaults to current date
+  timezone: America/New_York
+  storage_format: parquet
+  raw_dir: data/raw/daily_quotes
+  processed_daily_dir: data/processed/daily
+  processed_weekly_dir: data/processed/weekly
+
+features:
+  daily:
+    price_windows: [3, 5, 10, 20]
+    volatility_windows: [5, 10, 21]
+    momentum_windows: [5, 10, 21]
+    rsi_windows: [14]
+    macd:
+      fast: 12
+      slow: 26
+      signal: 9
+  weekly:
+    price_windows: [2, 4, 8]
+    volatility_windows: [4, 8]
+    momentum_windows: [4, 8]
+    rsi_windows: [14]
+    macd:
+      fast: 8
+      slow: 17
+      signal: 9
+
+modeling:
+  horizons:
+    regression: 1          # next-period return
+    classification: 1      # next-period direction
+    forecasting:
+      - 1
+      - 5
+  experiment_models:
+    time_series:
+      - model: RandomForestRegressor
+        params:
+          n_estimators: 100
+          max_depth: 6
+      - model: GradientBoostingRegressor
+        params:
+          n_estimators: 200
+          learning_rate: 0.05
+    regression:
+      - model: LinearRegression
+        params: {}
+      - model: RandomForestRegressor
+        params:
+          n_estimators: 200
+          max_depth: 8
+    classification:
+      - model: LogisticRegression
+        params:
+          max_iter: 1000
+          class_weight: balanced
+      - model: RandomForestClassifier
+        params:
+          n_estimators: 300
+          max_depth: 8
+  tuning:
+    cv_splits: 5
+    scoring:
+      regression: neg_mean_squared_error
+      classification: f1_macro
+      forecasting: neg_mean_squared_error
+
+predict:
+  recent_periods: 60
+  output_dir: data/predictions
+
+
