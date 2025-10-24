@@ -1,3 +1,6 @@
+# DOES NOT WORK - DO NOT USE
+
+
 # Stock Market ML: Daily & Weekly Forecasting Framework
 
 This repository provides a modular, end-to-end machine learning stack for predicting stock market movements at daily and weekly resolutions. Each pipeline stage is implemented as a standalone script so that data scientists can iterate, debug, and deploy individual components without blocking on the rest of the system.
@@ -56,14 +59,14 @@ Loads the finalized models, scores the latest processed features, and writes tim
 ```
 +-- config.yaml
 +-- data/
-¦   +-- raw/
-¦   +-- processed/
-¦   +-- results/
-¦   +-- predictions/
+Â¦   +-- raw/
+Â¦   +-- processed/
+Â¦   +-- results/
+Â¦   +-- predictions/
 +-- src/
-¦   +-- ingest, process, experiment, tune, and predict scripts
-¦   +-- utils/
-¦   +-- config_schemas/
+Â¦   +-- ingest, process, experiment, tune, and predict scripts
+Â¦   +-- utils/
+Â¦   +-- config_schemas/
 +-- requirements.txt
 ```
 
